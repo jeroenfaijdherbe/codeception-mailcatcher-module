@@ -326,7 +326,7 @@ class MailCatcher extends Module
     {
         $response = $this->mailcatcher->get("/messages/{$id}.json");
         $messageData = json_decode($response->getBody(), true);
-        $messageData['source'] = $this->mailcatcher->get("/messages/{$id}.source")->getBody();
+        $messageData['source'] = (string)$this->mailcatcher->get("/messages/{$id}.source")->getBody();
         error_log($messageData['source']);
 
         return Email::createFromMailcatcherData($messageData);
